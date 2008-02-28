@@ -3,7 +3,7 @@ Summary:	QNapi - Movie Subtitle Downloader
 Summary(pl.UTF-8):	QNapi - program pobierający napisy do filmów
 Name:		qnapi
 Version:	0.1.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Multimedia
 Source0:	http://krzemin.iglu.cz/qnapi/%{name}-%{version}.tar.gz
@@ -32,7 +32,7 @@ pozwala zwiększyć rozmiar bazy NAPI.
 %setup -q
 
 %build
-qt4-qmake -unix -o Makefile %{name}.pro
+qmake-qt4 -unix -o Makefile %{name}.pro
 %{__make} clean
 %{__make}
 
