@@ -43,21 +43,23 @@ install -d $RPM_BUILD_ROOT%{_bindir}
 install qnapi $RPM_BUILD_ROOT%{_bindir}
 
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
-install manpage $RPM_BUILD_ROOT%{_mandir}/man1/%{name}.1
+install doc/manpage $RPM_BUILD_ROOT%{_mandir}/man1/%{name}.1
 
 install -d $RPM_BUILD_ROOT%{_iconsdir}
 install src/%{name}.png $RPM_BUILD_ROOT%{_iconsdir}
-install src/%{name}_44x44.png $RPM_BUILD_ROOT%{_iconsdir}
+install src/%{name}-48.png $RPM_BUILD_ROOT%{_iconsdir}
+install src/%{name}-128.png $RPM_BUILD_ROOT%{_iconsdir}
+install src/%{name}-512.png $RPM_BUILD_ROOT%{_iconsdir}
 
 install -d $RPM_BUILD_ROOT%{_desktopdir}
-install %{name}.desktop $RPM_BUILD_ROOT%{_desktopdir}
+install doc/%{name}.desktop $RPM_BUILD_ROOT%{_desktopdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README
+%doc doc/ChangeLog doc/README
 %attr(755,root,root) %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.*
 %{_iconsdir}/%{name}*.png
