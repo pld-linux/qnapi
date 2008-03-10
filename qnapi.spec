@@ -2,12 +2,12 @@
 Summary:	QNapi - Movie Subtitle Downloader
 Summary(pl.UTF-8):	QNapi - program pobierający napisy do filmów
 Name:		qnapi
-Version:	0.1.2
-Release:	2
+Version:	0.1.3
+Release:	1
 License:	GPL
 Group:		Applications/Multimedia
-Source0:	http://krzemin.iglu.cz/qnapi/%{name}-%{version}.tar.gz
-# Source0-md5:	4451928c89a9d92ca53d849793b55b0a
+Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	ce22cb608228868791c32e8dafe3be10
 URL:		http://krzemin.iglu.cz/qnapi/
 BuildRequires:	QtGui-devel >= 4.3.0
 BuildRequires:	QtNetwork-devel >= 4.3.0
