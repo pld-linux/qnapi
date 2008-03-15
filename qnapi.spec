@@ -1,12 +1,11 @@
-#
 Summary:	QNapi - Movie Subtitle Downloader
 Summary(pl.UTF-8):	QNapi - program pobierający napisy do filmów
 Name:		qnapi
 Version:	0.1.3
 Release:	2
 License:	GPL
-Group:		Applications/Multimedia
-Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Group:		X11/Applications/Multimedia
+Source0:	http://dl.sourceforge.net/qnapi/%{name}-%{version}.tar.gz
 # Source0-md5:	ce22cb608228868791c32e8dafe3be10
 Source1:	%{name}-konqueror.desktop
 URL:		http://krzemin.iglu.cz/qnapi/
@@ -19,7 +18,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 QNapi are unofficial and free clone of NAPI-PROJEKT written for Linux
-users.
+(and other OS) users, for which there is no official NAPI-PROJEKT
+client. This program has functionality similar to the original client
+(adding subtitles, sending bug reports etc.), thus it helps in
+increasing NAPI database.
 
 %description -l pl.UTF-8
 QNapi jest nieoficjalnym, wolnym klonem programu NAPI-PROJEKT,
@@ -30,30 +32,31 @@ dodawanie napisów, zgłaszanie raportów o błędach), przez co
 pozwala zwiększyć rozmiar bazy NAPI.
 
 %package konqueror
-Summary:	Konqueror actions for Qnapi
-Summary(pl.UTF-8):	Akcje dla Konqueror
+Summary:	Konqueror actions for QNapi
+Summary(pl.UTF-8):	Akcje QNapi dla Konquerora
 Group:		Applications/Multimedia
 Requires:	konqueror
 Requires:	qnapi
 
 %description konqueror
-Qnapi actions on media files.
+QNapi actions on media files for Konqueror.
 
 %description konqueror -l pl.UTF-8
-Dodaje akcje na plikach multimedialnych.
+Ten pakiet dodaje do Konquerora akcje QNapi na plikach
+multimedialnych.
 
 %package dolphin
-Summary:	dolphin actions for Qnapi
-Summary(pl.UTF-8):	Akcje dla Dolphin
+Summary:	dolphin actions for QNapi
+Summary(pl.UTF-8):	Akcje QNapi dla Dolphina
 Group:		Applications/Multimedia
 Requires:	kde-dolphin
 Requires:	qnapi
 
 %description dolphin
-Qnapi actions on media files.
+QNapi actions on media files for Dolphin.
 
 %description dolphin -l pl.UTF-8
-Dodaje akcje na plikach multimedialnych.
+Ten pakiet dodaje do Dolphina akcje QNapi na plikach multimedialnych.
 
 %prep
 %setup -q
@@ -81,10 +84,10 @@ install src/%{name}-512.png $RPM_BUILD_ROOT%{_iconsdir}
 install -d $RPM_BUILD_ROOT%{_desktopdir}
 install doc/%{name}.desktop $RPM_BUILD_ROOT%{_desktopdir}
 
-install -d $RPM_BUILD_ROOT%{_datadir}/apps/konqueror/servicemenus/
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/apps/konqueror/servicemenus/
-install -d $RPM_BUILD_ROOT%{_datadir}/apps/dolphin/servicemenus/
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/apps/dolphin/servicemenus/
+install -d $RPM_BUILD_ROOT%{_datadir}/apps/konqueror/servicemenus
+install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/apps/konqueror/servicemenus
+install -d $RPM_BUILD_ROOT%{_datadir}/apps/dolphin/servicemenus
+install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/apps/dolphin/servicemenus
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -98,7 +101,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/%{name}.desktop
 
 %files konqueror
+%defattr(644,root,root,755)
 %{_datadir}/apps/konqueror/servicemenus/%{name}*.desktop
 
 %files dolphin
+%defattr(644,root,root,755)
 %{_datadir}/apps/dolphin/servicemenus/%{name}*.desktop
