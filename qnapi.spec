@@ -28,15 +28,15 @@ QNapi jest nieoficjalnym, wolnym klonem programu NAPI-PROJEKT,
 napisanym z myślą o użytkownikach Linuksa oraz innych systemów
 operacyjnych, pod które oryginalny NAPI-PROJEKT nie jest dostępny.
 Program ma funkcjonalność zbliżoną do oryginalnego klienta (m.in.
-dodawanie napisów, zgłaszanie raportów o błędach), przez co
-pozwala zwiększyć rozmiar bazy NAPI.
+dodawanie napisów, zgłaszanie raportów o błędach), przez co pozwala
+zwiększyć rozmiar bazy NAPI.
 
 %package konqueror
 Summary:	Konqueror actions for QNapi
 Summary(pl.UTF-8):	Akcje QNapi dla Konquerora
 Group:		Applications/Multimedia
+Requires:	%{name} = %{version}-%{release}
 Requires:	konqueror
-Requires:	qnapi
 
 %description konqueror
 QNapi actions on media files for Konqueror.
@@ -49,8 +49,8 @@ multimedialnych.
 Summary:	dolphin actions for QNapi
 Summary(pl.UTF-8):	Akcje QNapi dla Dolphina
 Group:		Applications/Multimedia
+Requires:	%{name} = %{version}-%{release}
 Requires:	kde-dolphin
-Requires:	qnapi
 
 %description dolphin
 QNapi actions on media files for Dolphin.
