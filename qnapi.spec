@@ -1,12 +1,12 @@
 Summary:	QNapi - Movie Subtitle Downloader
 Summary(pl.UTF-8):	QNapi - program pobierający napisy do filmów
 Name:		qnapi
-Version:	0.1.3
-Release:	2
+Version:	0.1.4
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/qnapi/%{name}-%{version}.tar.gz
-# Source0-md5:	ce22cb608228868791c32e8dafe3be10
+# Source0-md5:	854f482494c5ef723d824766d61714df
 Source1:	%{name}-konqueror.desktop
 URL:		http://krzemin.iglu.cz/qnapi/
 BuildRequires:	QtGui-devel >= 4.3.0
@@ -73,13 +73,13 @@ install -d $RPM_BUILD_ROOT%{_bindir}
 install qnapi $RPM_BUILD_ROOT%{_bindir}
 
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
-install doc/manpage $RPM_BUILD_ROOT%{_mandir}/man1/%{name}.1
+install doc/*.1 $RPM_BUILD_ROOT%{_mandir}/man1/%{name}.1
 
 install -d $RPM_BUILD_ROOT%{_iconsdir}
-install src/%{name}.png $RPM_BUILD_ROOT%{_iconsdir}
-install src/%{name}-48.png $RPM_BUILD_ROOT%{_iconsdir}
-install src/%{name}-128.png $RPM_BUILD_ROOT%{_iconsdir}
-install src/%{name}-512.png $RPM_BUILD_ROOT%{_iconsdir}
+install res/%{name}.png $RPM_BUILD_ROOT%{_iconsdir}
+install res/%{name}-48.png $RPM_BUILD_ROOT%{_iconsdir}
+install res/%{name}-128.png $RPM_BUILD_ROOT%{_iconsdir}
+install res/%{name}-512.png $RPM_BUILD_ROOT%{_iconsdir}
 
 install -d $RPM_BUILD_ROOT%{_desktopdir}
 install doc/%{name}.desktop $RPM_BUILD_ROOT%{_desktopdir}
