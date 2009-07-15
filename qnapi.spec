@@ -1,12 +1,15 @@
+
+%define rel rc2
+
 Summary:	QNapi - Movie Subtitle Downloader
 Summary(pl.UTF-8):	QNapi - program pobierający napisy do filmów
 Name:		qnapi
-Version:	0.1.5
-Release:	1
+Version:	0.1.6
+Release:	0.%{rel}.1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/qnapi/%{name}-%{version}.tar.gz
-# Source0-md5:	503a34b4605507740bca5fbf6a20fbf8
+Source0:	http://dl.sourceforge.net/qnapi/%{name}-%{version}-%{rel}.tar.gz
+# Source0-md5:	84daa5dea51e8612bda26bdc4361ea62
 Source1:	%{name}-konqueror.desktop
 URL:		http://krzemin.iglu.cz/qnapi/
 BuildRequires:	QtGui-devel >= 4.3.0
@@ -45,6 +48,19 @@ QNapi actions on media files for Konqueror.
 Ten pakiet dodaje do Konquerora akcje QNapi na plikach
 multimedialnych.
 
+%package kde4
+Summary:	Konqueror actions for QNapi
+Summary(pl.UTF-8):	Akcje QNapi dla Konquerora
+Group:		Applications/Multimedia
+Requires:	%{name} = %{version}-%{release}
+
+%description kde4
+QNapi actions on media files for KDE4.
+
+%description kde4 -l pl.UTF-8
+Ten pakiet dodaje do KDE4 akcje QNapi na plikach
+multimedialnych.
+
 %package dolphin
 Summary:	dolphin actions for QNapi
 Summary(pl.UTF-8):	Akcje QNapi dla Dolphina
@@ -59,7 +75,7 @@ QNapi actions on media files for Dolphin.
 Ten pakiet dodaje do Dolphina akcje QNapi na plikach multimedialnych.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{rel}
 
 %build
 qmake-qt4 -unix -o Makefile %{name}.pro
@@ -88,6 +104,8 @@ install -d $RPM_BUILD_ROOT%{_datadir}/apps/konqueror/servicemenus
 install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/apps/konqueror/servicemenus
 install -d $RPM_BUILD_ROOT%{_datadir}/apps/dolphin/servicemenus
 install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/apps/dolphin/servicemenus
+install -d $RPM_BUILD_ROOT%{_datadir}/kde4/services/ServiceMenus
+install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/kde4/services/ServiceMenus/qnapi-download.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -103,6 +121,10 @@ rm -rf $RPM_BUILD_ROOT
 %files konqueror
 %defattr(644,root,root,755)
 %{_datadir}/apps/konqueror/servicemenus/%{name}*.desktop
+
+%files kde4
+%defattr(644,root,root,755)
+%{_datadir}/kde4/services/ServiceMenus/%{name}*.desktop
 
 %files dolphin
 %defattr(644,root,root,755)

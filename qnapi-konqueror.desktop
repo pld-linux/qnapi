@@ -6,11 +6,13 @@ Name=Get video subtitles from QNapi
 Name[pl]=Pobierz napisy do filmu z QNapi
 GenericName=Get video subtitles from QNapi
 GenericName[pl]=Pobierz napisy do filmu z QNapi
-Icon=qnapi.png
+Icon=qnapi
 ServiceTypes=video/x-msvideo,video/x-ms-asf,video/mpeg,video/x-ms-wmv,video/mp4,video/quicktime,video/x-theora,video/x-matroska,video/3gpp,application/vnd.rn-realmedia,application/vnd.rn-realmedia-vbr
-Type=Application
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
 
 [Desktop Action QNapiDownload]
 Name=Get video subtitles from QNapi
 Name[pl]=Pobierz napisy do filmu z QNapi
 Exec=qnapi %F
+Icon=qnapi
