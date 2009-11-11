@@ -14,6 +14,7 @@ Source1:	%{name}-konqueror.desktop
 URL:		http://krzemin.iglu.cz/qnapi/
 BuildRequires:	QtGui-devel >= 4.3.0
 BuildRequires:	QtNetwork-devel >= 4.3.0
+BuildRequires:	QtXml-devel >= 4.3.0
 BuildRequires:	qt4-build >= 4.3.0
 BuildRequires:	qt4-qmake >= 4.3.0
 Requires:	p7zip
