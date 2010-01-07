@@ -67,7 +67,7 @@ Summary:	dolphin actions for QNapi
 Summary(pl.UTF-8):	Akcje QNapi dla Dolphina
 Group:		Applications/Multimedia
 Requires:	%{name} = %{version}-%{release}
-Requires:	kde-dolphin
+Requires:	kde4-dolphin
 
 %description dolphin
 QNapi actions on media files for Dolphin.
