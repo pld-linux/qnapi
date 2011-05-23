@@ -1,12 +1,11 @@
-
 Summary:	QNapi - Movie Subtitle Downloader
 Summary(pl.UTF-8):	QNapi - program pobierający napisy do filmów
 Name:		qnapi
 Version:	0.1.5
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://dl.sourceforge.net/qnapi/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/qnapi/%{name}-%{version}.tar.gz
 # Source0-md5:	503a34b4605507740bca5fbf6a20fbf8
 Source1:	%{name}-konqueror.desktop
 URL:		http://krzemin.iglu.cz/qnapi/
@@ -57,8 +56,7 @@ Requires:	%{name} = %{version}-%{release}
 QNapi actions on media files for KDE4.
 
 %description kde4 -l pl.UTF-8
-Ten pakiet dodaje do KDE4 akcje QNapi na plikach
-multimedialnych.
+Ten pakiet dodaje do KDE4 akcje QNapi na plikach multimedialnych.
 
 %package dolphin
 Summary:	dolphin actions for QNapi
@@ -85,26 +83,26 @@ qmake-qt4 -unix -o Makefile %{name}.pro
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_bindir}
-install qnapi $RPM_BUILD_ROOT%{_bindir}
+install -p qnapi $RPM_BUILD_ROOT%{_bindir}
 
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
-install doc/*.1 $RPM_BUILD_ROOT%{_mandir}/man1/%{name}.1
+cp -p doc/*.1 $RPM_BUILD_ROOT%{_mandir}/man1/%{name}.1
 
 install -d $RPM_BUILD_ROOT%{_iconsdir}
-install res/%{name}.png $RPM_BUILD_ROOT%{_iconsdir}
-install res/%{name}-48.png $RPM_BUILD_ROOT%{_iconsdir}
-install res/%{name}-128.png $RPM_BUILD_ROOT%{_iconsdir}
-install res/%{name}-512.png $RPM_BUILD_ROOT%{_iconsdir}
+cp -p res/%{name}.png $RPM_BUILD_ROOT%{_iconsdir}
+cp -p res/%{name}-48.png $RPM_BUILD_ROOT%{_iconsdir}
+cp -p res/%{name}-128.png $RPM_BUILD_ROOT%{_iconsdir}
+cp -p res/%{name}-512.png $RPM_BUILD_ROOT%{_iconsdir}
 
 install -d $RPM_BUILD_ROOT%{_desktopdir}
-install doc/%{name}.desktop $RPM_BUILD_ROOT%{_desktopdir}
+cp -p doc/%{name}.desktop $RPM_BUILD_ROOT%{_desktopdir}
 
 install -d $RPM_BUILD_ROOT%{_datadir}/apps/konqueror/servicemenus
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/apps/konqueror/servicemenus
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/apps/konqueror/servicemenus
 install -d $RPM_BUILD_ROOT%{_datadir}/apps/dolphin/servicemenus
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/apps/dolphin/servicemenus
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/apps/dolphin/servicemenus
 install -d $RPM_BUILD_ROOT%{_datadir}/kde4/services/ServiceMenus
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/kde4/services/ServiceMenus/qnapi-download.desktop
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/kde4/services/ServiceMenus/qnapi-download.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -117,14 +115,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/%{name}*.png
 %{_desktopdir}/%{name}.desktop
 
-%files konqueror
-%defattr(644,root,root,755)
-%{_datadir}/apps/konqueror/servicemenus/%{name}*.desktop
-
 %files kde4
 %defattr(644,root,root,755)
 %{_datadir}/kde4/services/ServiceMenus/%{name}*.desktop
 
+%if 0
+error: qnapi-konqueror-0.1.5-3: req konqueror not found
+%files konqueror
+%defattr(644,root,root,755)
+%{_datadir}/apps/konqueror/servicemenus/%{name}*.desktop
+
+error: qnapi-dolphin-0.1.5-3: req kde-dolphin not found
 %files dolphin
 %defattr(644,root,root,755)
 %{_datadir}/apps/dolphin/servicemenus/%{name}*.desktop
+%endif
