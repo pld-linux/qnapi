@@ -1,20 +1,22 @@
 Summary:	QNapi - Movie Subtitle Downloader
 Summary(pl.UTF-8):	QNapi - program pobierający napisy do filmów
 Name:		qnapi
-Version:	0.1.5
-Release:	4
+Version:	0.2.3
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
-Source0:	http://downloads.sourceforge.net/qnapi/%{name}-%{version}.tar.gz
-# Source0-md5:	503a34b4605507740bca5fbf6a20fbf8
-Source1:	%{name}-konqueror.desktop
-URL:		http://krzemin.iglu.cz/qnapi/
-BuildRequires:	QtGui-devel >= 4.3.0
-BuildRequires:	QtNetwork-devel >= 4.3.0
-BuildRequires:	QtXml-devel >= 4.3.0
-BuildRequires:	qt4-build >= 4.3.0
-BuildRequires:	qt4-qmake >= 4.3.0
+Source0:	https://github.com/QNapi/qnapi/releases/download/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	5280a524031e31baa94ded730cff0bdd
+Patch0:		qt-5.15.patch
+URL:		http://qnapi.github.io/
+BuildRequires:	Qt5Gui-devel >= 4.3.0
+BuildRequires:	Qt5Network-devel >= 4.3.0
+BuildRequires:	Qt5Xml-devel >= 4.3.0
+BuildRequires:	libmediainfo-devel
+BuildRequires:	qt5-build >= 4.3.0
+BuildRequires:	qt5-qmake >= 4.3.0
 Requires:	p7zip
+Obsoletes:	qnapi-kde4 < 0.2.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -32,101 +34,30 @@ Program ma funkcjonalność zbliżoną do oryginalnego klienta (m.in.
 dodawanie napisów, zgłaszanie raportów o błędach), przez co pozwala
 zwiększyć rozmiar bazy NAPI.
 
-%package konqueror
-Summary:	Konqueror actions for QNapi
-Summary(pl.UTF-8):	Akcje QNapi dla Konquerora
-Group:		Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
-Requires:	konqueror
-
-%description konqueror
-QNapi actions on media files for Konqueror.
-
-%description konqueror -l pl.UTF-8
-Ten pakiet dodaje do Konquerora akcje QNapi na plikach
-multimedialnych.
-
-%package kde4
-Summary:	Konqueror actions for QNapi
-Summary(pl.UTF-8):	Akcje QNapi dla Konquerora
-Group:		Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
-
-%description kde4
-QNapi actions on media files for KDE4.
-
-%description kde4 -l pl.UTF-8
-Ten pakiet dodaje do KDE4 akcje QNapi na plikach multimedialnych.
-
-%package dolphin
-Summary:	dolphin actions for QNapi
-Summary(pl.UTF-8):	Akcje QNapi dla Dolphina
-Group:		Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
-Requires:	kde-dolphin
-
-%description dolphin
-QNapi actions on media files for Dolphin.
-
-%description dolphin -l pl.UTF-8
-Ten pakiet dodaje do Dolphina akcje QNapi na plikach multimedialnych.
-
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-qmake-qt4 -unix -o Makefile %{name}.pro
+qmake-qt5
 %{__make} clean
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_bindir}
-install -p qnapi $RPM_BUILD_ROOT%{_bindir}
-
-install -d $RPM_BUILD_ROOT%{_mandir}/man1
-cp -p doc/*.1 $RPM_BUILD_ROOT%{_mandir}/man1/%{name}.1
-
-install -d $RPM_BUILD_ROOT%{_iconsdir}
-cp -p res/%{name}.png $RPM_BUILD_ROOT%{_iconsdir}
-cp -p res/%{name}-48.png $RPM_BUILD_ROOT%{_iconsdir}
-cp -p res/%{name}-128.png $RPM_BUILD_ROOT%{_iconsdir}
-cp -p res/%{name}-512.png $RPM_BUILD_ROOT%{_iconsdir}
-
-install -d $RPM_BUILD_ROOT%{_desktopdir}
-cp -p doc/%{name}.desktop $RPM_BUILD_ROOT%{_desktopdir}
-
-install -d $RPM_BUILD_ROOT%{_datadir}/apps/konqueror/servicemenus
-cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/apps/konqueror/servicemenus
-install -d $RPM_BUILD_ROOT%{_datadir}/apps/dolphin/servicemenus
-cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/apps/dolphin/servicemenus
-install -d $RPM_BUILD_ROOT%{_datadir}/kde4/services/ServiceMenus
-cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/kde4/services/ServiceMenus/qnapi-download.desktop
+%{__make} install \
+	INSTALL_ROOT=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/ChangeLog doc/README
+%doc doc/ChangeLog README.md
 %attr(755,root,root) %{_bindir}/%{name}
-%{_mandir}/man1/%{name}.*
-%{_iconsdir}/%{name}*.png
+%{_iconsdir}/hicolor/*x*/apps/%{name}*.png
 %{_desktopdir}/%{name}.desktop
-
-%files kde4
-%defattr(644,root,root,755)
-%{_datadir}/kde4/services/ServiceMenus/%{name}*.desktop
-
-%if 0
-error: qnapi-konqueror-0.1.5-3: req konqueror not found
-%files konqueror
-%defattr(644,root,root,755)
-%{_datadir}/apps/konqueror/servicemenus/%{name}*.desktop
-
-error: qnapi-dolphin-0.1.5-3: req kde-dolphin not found
-%files dolphin
-%defattr(644,root,root,755)
-%{_datadir}/apps/dolphin/servicemenus/%{name}*.desktop
-%endif
+%{_mandir}/man1/%{name}.*
+%lang(it) %{_mandir}/it/man1/%{name}.*
+%lang(pl) %{_mandir}/pl/man1/%{name}.*

@@ -1,0 +1,10 @@
+--- qnapi-0.2.3/gui/src/forms/subdatawidget.h~	2017-05-19 19:17:15.000000000 +0200
++++ qnapi-0.2.3/gui/src/forms/subdatawidget.h	2022-02-23 09:20:46.253412397 +0100
+@@ -15,6 +15,7 @@
+ #ifndef SUBDATAWIDGET_H
+ #define SUBDATAWIDGET_H
+ 
++#include <QIcon>
+ #include <QWidget>
+ #include "ui_subDataWidget.h"
+ 
